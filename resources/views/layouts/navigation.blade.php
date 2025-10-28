@@ -1,7 +1,7 @@
 <nav class="bg-white  w-full border-b border-gray-200">
     <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-2">
         <!-- Logo -->
-        <a href="/" class="flex items-center space-x-3">+
+        <a href="/" class="flex items-center space-x-3">
             <img src="/logo.png" class="h-20 w-auto" alt="Logo">
         </a>
 
@@ -9,16 +9,23 @@
         <div class="flex items-center space-x-3 md:order-2">
             <a href="/login"
                 class="text-white bg-[#009a66] hover:bg-opacity-90 font-medium rounded-lg text-sm px-4 py-2 transition uppercase">
-                Login
+                Donate <i class="fa-solid fa-circle-dollar-to-slot"></i>
             </a>
+
             <a href="/register"
                 class="text-white bg-[#eb9532] hover:bg-opacity-90 font-medium rounded-lg text-sm px-4 py-2 transition uppercase">
                 Register
             </a>
 
+            <a href="/login"
+                class="text-white bg-[#009a66] hover:bg-opacity-90 font-medium rounded-lg text-sm px-4 py-2 transition uppercase">
+                Login
+            </a>
+
+
             <!-- Mobile menu toggle -->
             <button data-collapse-toggle="navbar-sticky" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                class="inline-flex items-center w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 aria-controls="navbar-sticky" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
