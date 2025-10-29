@@ -2,342 +2,358 @@
 @section('title', 'Membership Form')
 
 @php
-    $inputClass =
-        'bg-gray-50 text-gray-900 text-sm focus:ring-[#009a66] focus:border-[#009a66] block w-full p-2.5 rounded-[4px] border border-[#ccc] text-[14px]';
+    $inputClass = '
+        border-0 border-b border-[#C6C6C6]
+        bg-white w-full h-[33.52px]
+        focus:border-[#009a66] focus:ring-0 focus:outline-none
+        rounded-none transition-colors duration-200 text-[18px]
+    ';
 @endphp
 
 @section('content')
-    <div class="w-full max-w-4xl mx-auto mt-10 p-8 bg-white border border-gray-200 rounded-lg shadow-md">
-        <div class="flex items-center justify-center mb-3">
-            <a href="/">
-                <img src="/logo.png" class="h-20 w-auto" alt="Logo">
-            </a>
-        </div>
+    <section class="w-full bg-white min-h-screen flex items-center justify-center">
+        <div class="p-3 flex flex-col md:flex-row w-full items-center justify-center relative">
 
-        <h1 class="text-[27px] text-center mb-10 text-[#eb9532]">Membership Information</h1>
 
-        {{-- Flash messages --}}
-        @includeWhen(session('success') || session('error'), 'alerts.alert')
-
-        <div class="flex justify-center mb-6">
-            <div class="flex items-center space-x-3">
-                <div
-                    class="w-8 h-8 flex items-center justify-center rounded-full 
-                    {{ session('step', 1) >= 1 ? 'bg-[#eb9532] text-white' : 'bg-gray-300 text-gray-700' }}">
-                    1</div>
-                <div class="h-[2px] w-8 bg-gray-300"></div>
-                <div
-                    class="w-8 h-8 flex items-center justify-center rounded-full 
-                    {{ session('step', 1) >= 2 ? 'bg-[#eb9532] text-white' : 'bg-gray-300 text-gray-700' }}">
-                    2</div>
-                <div class="h-[2px] w-8 bg-gray-300"></div>
-                <div
-                    class="w-8 h-8 flex items-center justify-center rounded-full 
-                    {{ session('step', 1) >= 3 ? 'bg-[#eb9532] text-white' : 'bg-gray-300 text-gray-700' }}">
-                    3</div>
+            <div class="hidden md:block w-[451px] min-h-screen bg-cover bg-center bg-no-repeat rounded-[20px]"
+                style="background-image: url('{{ asset('images/register-bg.svg') }}');">
             </div>
-        </div>
 
-        <form method="POST" action="{{ route('register.step.submit') }}">
-            @csrf
-            <!-- Hidden fields to absorb autofill (common trick) -->
-            <input type="text" name="fake_user" id="fake_user"
-                style="position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;"
-                autocomplete="username" tabindex="-1" />
-            <input type="password" name="fake_pass" id="fake_pass"
-                style="position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;"
-                autocomplete="new-password" tabindex="-1" />
-
-            @php $step = session('step', 1); @endphp
-
-            @if ($step === 1)
-                {{-- Step 1: Basic Info --}}
-                <div class="grid gap-3 md:gap-6 mb-3 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">First Name</label>
-                        <input type="text" name="first_name"
-                            value="{{ old('first_name', session('form_data.first_name')) }}" class="{{ $inputClass }}"
-                            required autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
-                        @error('first_name')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
-                        <input type="text" name="last_name"
-                            value="{{ old('last_name', session('form_data.last_name')) }}" class="{{ $inputClass }}"
-                            required autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
-                        @error('last_name')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+            {{-- Right Form --}}
+            <div class="w-full flex flex-col items-center justify-center px-3 md:px-[30px] lg:px-[60px]">
+                {{-- Logo --}}
+                <div class="flex items-center w-full justify-center mb-8">
+                    <a href="{{ route('homepage') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo"
+                            class="w-60"></a>
                 </div>
-                <div class="grid gap-3 md:gap-6 mb-3 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                        <input name="username" value="{{ old('username', session('form_data.username')) }}"
-                            class="{{ $inputClass }}" required autocomplete="nope" autocorrect="off" autocapitalize="off"
-                            spellcheck="false" readonly onfocus="this.removeAttribute('readonly')">
-                        @error('username')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
 
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Email Address</label>
-                        <input type="email" name="email" value="{{ old('email', session('form_data.email')) }}"
-                            class="{{ $inputClass }}" required autocomplete="nope" autocorrect="off" autocapitalize="off"
-                            spellcheck="false" readonly onfocus="this.removeAttribute('readonly')">
-                        @error('email')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                {{-- Flash messages --}}
+                @includeWhen(session('success') || session('error'), 'alerts.alert')
+
+
+                <p class="auth-subtitle">REGISTER</p>
+                <h2 class="auth-title pb-8">BECOME A MEMBER!</h2>
+
+                <div class="flex justify-center mb-12">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full 
+                    {{ session('step', 1) >= 1 ? 'bg-[#003C05] text-white' : 'bg-[D9D9D9] text-gray-700' }}">
+                            1</div>
+                        <div class="h-0.5 w-8 bg-[D9D9D9]"></div>
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full 
+                    {{ session('step', 1) >= 2 ? 'bg-[#003C05] text-white' : 'bg-[D9D9D9] text-gray-700' }}">
+                            2</div>
+                        <div class="h-0.5 w-8 bg-[D9D9D9]"></div>
+                        <div
+                            class="w-8 h-8 flex items-center justify-center rounded-full 
+                    {{ session('step', 1) >= 3 ? 'bg-[#003C05] text-white' : 'bg-[D9D9D9] text-gray-700' }}">
+                            3</div>
                     </div>
                 </div>
 
-                <div class="grid gap-3 md:gap-6 mb-3 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                        <input type="password" name="password" class="{{ $inputClass }}" required autocomplete="nope"
-                            autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
-                        @error('password')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
 
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
-                        <input type="password" name="password_confirmation" class="{{ $inputClass }}" required
-                            autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
-                    </div>
-                </div>
-            @elseif ($step === 2)
-                {{-- Step 2: Contact Info --}}
-                <div class="grid gap-3 md:gap-6 mb-3 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Country</label>
-                        <select id="country" name="country" class="{{ $inputClass }}" required autocomplete="nope"
-                            autocorrect="off" class="{{ $inputClass }}" required>
-                            <option value="">Select your country</option>
-                            @foreach ($countries as $country)
-                                <option value="{{ $country->id }}"
-                                    {{ old('country', session('form_data.country')) == $country->id ? 'selected' : '' }}>
-                                    {{ $country->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('country')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                <form method="POST" action="{{ route('register.step.submit') }}" class="w-full">
+                    @csrf
+                    @php $step = session('step', 1); @endphp
 
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">State</label>
-                        <select id="state" name="state" class="{{ $inputClass }}" required autocomplete="nope"
-                            autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
+                    @if ($step === 1)
+                        {{-- First & Last Name --}}
+                        <div class="w-full flex flex-col lg:flex-row gap-8 mb-8">
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">First Name <span class="label-span">*</span></label>
+                                <input type="text" name="first_name"
+                                    value="{{ old('first_name', session('form_data.first_name')) }}"
+                                    class="{{ $inputClass }}" required>
+                                @error('first_name')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                        </select>
-                        @error('state')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Last Name <span class="label-span">*</span></label>
+                                <input type="text" name="last_name"
+                                    value="{{ old('last_name', session('form_data.last_name')) }}"
+                                    class="{{ $inputClass }}" required>
+                                @error('last_name')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
 
-                <div class="grid gap-3 md:gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">City</label>
-                        <select id="city" name="city" class="{{ $inputClass }}" required autocomplete="nope"
-                            autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
+                        {{-- Username & Email --}}
+                        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Username <span class="label-span">*</span></label>
+                                <input type="text" name="username"
+                                    value="{{ old('username', session('form_data.username')) }}"
+                                    class="{{ $inputClass }}" required>
+                                @error('username')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                        </select>
-                        @error('city')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Email Address <span class="label-span">*</span></label>
+                                <input type="email" name="email" value="{{ old('email', session('form_data.email')) }}"
+                                    class="{{ $inputClass }}" required>
+                                @error('email')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
 
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Zip Code</label>
-                        <input type="text" name="zip" class="{{ $inputClass }}" required autocomplete="nope"
-                            autocorrect="off" autocapitalize="off" spellcheck="false" readonly
-                            onfocus="this.removeAttribute('readonly')">
-                        @error('zip')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-            @elseif ($step === 3)
-                {{-- Step 3: Security --}}
-                <div class="grid gap-3 md:gap-6 mb-3 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Profession Type</label>
-                        <select id="profession" name="profession_type" class="{{ $inputClass }}" required>
-                            <option value="">Select your profession type</option>
-                            @foreach ($profession_types as $profession)
-                                <option value="{{ $profession->id }}"
-                                    {{ old('profession_type', session('form_data.profession_type')) == $profession->id ? 'selected' : '' }}>
-                                    {{ $profession->profession_type }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('profession_type')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                        {{-- Password & Confirm Password --}}
+                        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                            {{-- Password --}}
+                            <div class="relative flex flex-col w-full">
+                                <label class="auth-label">Password <span class="label-span">*</span></label>
+                                <input type="password" id="password" name="password" class="{{ $inputClass }} pr-10"
+                                    required>
+                                <button id="togglePassword" type="button">
+                                    <i id="password-icon"
+                                        class="fa-solid fa-eye absolute right-2 top-[30px] text-gray-500 cursor-pointer"></i></button>
+                                @error('password')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                    <div>
-                        <label for="golf_score" class="block mb-2 text-sm font-medium text-gray-900">
-                            Golf Score Level
-                        </label>
-                        <select id="golf_score" name="golf_score" class="{{ $inputClass }}" required>
+                            {{-- Confirm Password --}}
+                            <div class="relative flex flex-col w-full">
+                                <label class="auth-label">Confirm Password <span class="label-span">*</span></label>
+                                <input type="password" id="confirmPassword" name="password_confirmation"
+                                    class="{{ $inputClass }} pr-10" required>
+                                <button type="button" id="toggleConfirmPassword"><i id="confirm-icon"
+                                        class="fa-solid fa-eye absolute right-2 top-[30px] text-gray-500 cursor-pointer"></i></button>
+                            </div>
+                        </div>
+                    @elseif ($step === 2)
+                        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Country <span class="label-span">*</span></label>
+                                <select id="country" name="country" class="{{ $inputClass }}" required>
+                                    <option value="">Select your country</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}"
+                                            {{ old('country', session('form_data.country')) == $country->id ? 'selected' : '' }}>
+                                            {{ $country->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('country')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                            <option value="" style="display:none;">Select Golf Score Level</option>
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">State <span class="label-span">*</span></label>
+                                <select id="state" name="state" class="{{ $inputClass }}" required>
 
-                            @php
-                                $selectedScore = old('golf_score', session('form_data.golf_score'));
-                            @endphp
+                                </select>
+                                @error('state')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <option value="Beginner" {{ $selectedScore == 'Beginner' ? 'selected' : '' }}>Beginner
-                            </option>
-                            <option value="62-71" {{ $selectedScore == '62-71' ? 'selected' : '' }}>Score 62-71</option>
-                            <option value="72-79" {{ $selectedScore == '72-79' ? 'selected' : '' }}>Score 72-79</option>
-                            <option value="80-87" {{ $selectedScore == '80-87' ? 'selected' : '' }}>Score 80-87</option>
-                            <option value="88-95" {{ $selectedScore == '88-95' ? 'selected' : '' }}>Score 88-95</option>
-                            <option value="96-103" {{ $selectedScore == '96-103' ? 'selected' : '' }}>Score 96-103
-                            </option>
-                            <option value="104-Above" {{ $selectedScore == '104-Above' ? 'selected' : '' }}>Score 104 -
-                                Above</option>
-                        </select>
+                        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">City <span class="label-span">*</span></label>
+                                <select id="city" name="city" class="{{ $inputClass }}" required>
 
-                        @error('golf_score')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+                                </select>
+                                @error('city')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                <div class="grid gap-3 md:gap-6 mb-3 md:grid-cols-2">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Home Golf Course</label>
-                        <select id="home_golf_course" name="home_golf_course" class="{{ $inputClass }}" required>
-                            <option value="">Select your home golf course</option>
-                            @foreach ($golf_courses as $id => $course_name)
-                                <option value="{{ $id }}"
-                                    {{ old('home_golf_course', session('form_data.home_golf_course')) == $id ? 'selected' : '' }}>
-                                    {{ $course_name }}
-                                </option>
-                            @endforeach
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Zip Code <span class="label-span">*</span></label>
+                                <input type="text" name="zip" class="{{ $inputClass }}" required>
+                                @error('zip')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    @elseif ($step === 3)
+                        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Profession Type <span class="label-span">*</span></label>
+                                <select id="profession" name="profession_type" class="{{ $inputClass }}" required>
+                                    <option value="">Select your profession type</option>
+                                    @foreach ($profession_types as $profession)
+                                        <option value="{{ $profession->id }}"
+                                            {{ old('profession_type', session('form_data.profession_type')) == $profession->id ? 'selected' : '' }}>
+                                            {{ $profession->profession_type }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('profession_type')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                        </select>
-                        @error('home_golf_course')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                            <div class="flex flex-col w-full">
+                                <label for="golf_score" class="auth-label">
+                                    Golf Score Level <span class="label-span">*</span>
+                                </label>
+                                <select id="golf_score" name="golf_score" class="{{ $inputClass }}" required>
 
-                    <div>
-                        <label for="user_type" class="block mb-2 text-sm font-medium text-gray-900">
-                            Select User Type
-                        </label>
-                        <select id="user_type" name="user_type" class="{{ $inputClass }}" required>
+                                    <option value="" style="display:none;">Select Golf Score Level</option>
 
-                            <option value="" style="display:none;">Select User Type</option>
+                                    @php
+                                        $selectedScore = old('golf_score', session('form_data.golf_score'));
+                                    @endphp
 
-                            @php
-                                $selectedUserType = old('user_type', session('form_data.user_type'));
-                            @endphp
+                                    <option value="Beginner" {{ $selectedScore == 'Beginner' ? 'selected' : '' }}>Beginner
+                                    </option>
+                                    <option value="62-71" {{ $selectedScore == '62-71' ? 'selected' : '' }}>Score 62-71
+                                    </option>
+                                    <option value="72-79" {{ $selectedScore == '72-79' ? 'selected' : '' }}>Score 72-79
+                                    </option>
+                                    <option value="80-87" {{ $selectedScore == '80-87' ? 'selected' : '' }}>Score 80-87
+                                    </option>
+                                    <option value="88-95" {{ $selectedScore == '88-95' ? 'selected' : '' }}>Score 88-95
+                                    </option>
+                                    <option value="96-103" {{ $selectedScore == '96-103' ? 'selected' : '' }}>Score 96-103
+                                    </option>
+                                    <option value="104-Above" {{ $selectedScore == '104-Above' ? 'selected' : '' }}>Score
+                                        104 -
+                                        Above</option>
+                                </select>
 
-                            @foreach ($user_types as $user_type)
-                                <option value="{{ $user_type->id }}"
-                                    {{ $selectedUserType == $user_type->id ? 'selected' : '' }}>
-                                    {{ $user_type->user_type }}
-                                </option>
-                            @endforeach
-                        </select>
+                                @error('golf_score')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
 
-                        @error('user_type')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+                        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                            <div class="flex flex-col w-full">
+                                <label class="auth-label">Home Golf Course <span class="label-span">*</span></label>
+                                <select id="home_golf_course" name="home_golf_course" class="{{ $inputClass }}"
+                                    required>
+                                    <option value="">Select your home golf course</option>
+                                    @foreach ($golf_courses as $id => $course_name)
+                                        <option value="{{ $id }}"
+                                            {{ old('home_golf_course', session('form_data.home_golf_course')) == $id ? 'selected' : '' }}>
+                                            {{ $course_name }}
+                                        </option>
+                                    @endforeach
 
-                <div class="mb-6">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">
-                        You may contact me to play golf
-                    </label>
+                                </select>
+                                @error('home_golf_course')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                    @php
-                        $fetch_play = [
-                            'Group of golfer',
-                            'Single Player',
-                            'Only weekends',
-                            'Tournaments',
-                            'Contact me to play golf',
-                            'Mostly during the week',
-                            'Sometimes',
-                        ];
+                            <div class="flex flex-col w-full">
+                                <label for="user_type" class="auth-label">
+                                    Select User Type <span class="label-span">*</span>
+                                </label>
+                                <select id="user_type" name="user_type" class="{{ $inputClass }}" required>
 
-                        $selected_play_types = old('play_type', explode(',', session('form_data.play_type', '')));
-                    @endphp
+                                    <option value="" style="display:none;">Select User Type</option>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        @foreach ($fetch_play as $play)
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="checkbox" name="play_type[]" value="{{ $play }}"
-                                    class="text-[#009a66] focus:ring-[#009a66] rounded"
-                                    {{ in_array(trim($play), $selected_play_types ?? []) ? 'checked' : '' }}>
-                                <span class="text-sm text-gray-700">{{ $play }}</span>
+                                    @php
+                                        $selectedUserType = old('user_type', session('form_data.user_type'));
+                                    @endphp
+
+                                    @foreach ($user_types as $user_type)
+                                        <option value="{{ $user_type->id }}"
+                                            {{ $selectedUserType == $user_type->id ? 'selected' : '' }}>
+                                            {{ $user_type->user_type }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('user_type')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-6 flex flex-col gap-3">
+                            <label class="auth-label">
+                                You may contact me to play golf <span class="label-span">*</span>
                             </label>
-                        @endforeach
+
+                            @php
+                                $fetch_play = [
+                                    'Group of golfer',
+                                    'Single Player',
+                                    'Only weekends',
+                                    'Tournaments',
+                                    'Contact me to play golf',
+                                    'Mostly during the week',
+                                    'Sometimes',
+                                ];
+
+                                $selected_play_types = old(
+                                    'play_type',
+                                    explode(',', session('form_data.play_type', '')),
+                                );
+                            @endphp
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                @foreach ($fetch_play as $play)
+                                    <label class="flex items-center space-x-2 cursor-pointer auth-label">
+                                        <input type="checkbox" name="play_type[]" value="{{ $play }}"
+                                            class="accent-[#003c05] border-gray-300 focus:ring-[#003c05] rounded-full w-4 h-5"
+                                            {{ in_array(trim($play), $selected_play_types ?? []) ? 'checked' : '' }}>
+                                        <span class="text-sm text-gray-700">{{ $play }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+
+                            @error('play_type')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="w-full flex gap-3 mb-6 items-center">
+                            <input id="agree" type="checkbox" name="agree"
+                                class="accent-[#003c05] border-gray-300 focus:ring-[#003c05] rounded-full w-4 h-5"
+                                required>
+                            <label for="agree" class="aggreement">
+                                I agree with the
+                                <a data-modal-target="terms-modal" data-modal-toggle="terms-modal"
+                                    class="text-[#009a66] hover:underline cursor-pointer">Terms & Conditions</a>
+                                and
+                                <a data-modal-target="privacy-modal" data-modal-toggle="privacy-modal"
+                                    class="text-[#009a66] hover:underline cursor-pointer">Privacy Policy</a>.
+                            </label>
+                        </div>
+                    @endif
+
+
+                    <div class="flex items-center justify-center gap-5 pt-5">
+                        @if ($step > 1)
+                            <button formaction="{{ route('register.step.prev') }}"
+                                class="auth-btn cursor-pointer w-full max-w-[200px] h-[57px] rounded-[10px] flex items-center justify-center bg-[#003C05] text-white transition">
+                                PREVIOUS
+                            </button>
+                        @endif
+
+                        <button
+                            class="auth-btn cursor-pointer w-full max-w-[200px] h-[57px] rounded-[10px] flex items-center justify-center bg-[#003C05] text-white transition">
+                            {{ $step < 3 ? 'NEXT' : 'SUBMIT' }}
+                        </button>
                     </div>
-                    @error('play_type')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="flex items-start mb-6">
-                    <input id="agree" type="checkbox" name="agree"
-                        class="mt-1 text-[#009a66] focus:ring-[#009a66] border-gray-300 rounded-sm" required>
-                    <label for="agree" class="ml-2 text-sm text-gray-700">
-                        I agree with the
-                        <a data-modal-target="terms-modal" data-modal-toggle="terms-modal"
-                            class="text-[#009a66] hover:underline cursor-pointer">Terms & Conditions</a>
-                        and
-                        <a data-modal-target="privacy-modal" data-modal-toggle="privacy-modal"
-                            class="text-[#009a66] hover:underline cursor-pointer">Privacy Policy</a>.
-                    </label>
-                </div>
-
-
-            @endif
-
-            <div class="flex justify-between items-center">
-                @if ($step > 1)
-                    <button formaction="{{ route('register.step.prev') }}"
-                        class="text-gray-600 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 transition">
-                        ← Back
-                    </button>
-                @endif
-
-                <button
-                    class="text-white bg-[#eb9532] hover:bg-[#c97d25] focus:ring-4 focus:outline-none focus:ring-[#d58427] font-medium rounded-lg text-sm px-5 py-2.5 transition">
-                    {{ $step < 3 ? 'Next' : 'Submit' }}
-                </button>
+                    <div class="text-center mt-6">
+                        <p class="auth-question">
+                            Already have an account?
+                            <a href="{{ route('login') }}" class="text-[#009a66] hover:underline font-medium">
+                                Login
+                            </a>
+                        </p>
+                    </div>
+                </form>
             </div>
-            <div class="text-center mt-6">
-                <p class="text-sm text-gray-700">
-                    Already have an account?
-                    <a href="{{ route('login') }}" class="text-[#009a66] hover:underline font-medium">
-                        Login
-                    </a>
-                </p>
-            </div>
+        </div>
+    </section>
 
-        </form>
-    </div>
 
     <!-- Terms of Service Modal -->
     <div id="terms-modal" tabindex="-1" aria-hidden="true"
@@ -722,6 +738,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

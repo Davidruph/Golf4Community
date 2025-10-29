@@ -5,14 +5,285 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-/* @theme {
-    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
-} */
+.auth-subtitle {
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 20px;
+    line-height: 50px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #094d02;
+}
+.auth-title {
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #094d02;
+}
+.auth-label {
+    font-family: Inter;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #003c05;
+}
+.label-span {
+    font-family: Inter;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: red;
+}
+input::placeholder {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 22px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #c1c1c1 !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Forces white background */
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important; /* Keeps text color normal */
+    transition: background-color 5000s ease-in-out 0s; /* Prevents flashing */
+}
 
-html {
-    font-family: "Raleway", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
+/* Optional: keep border and transitions intact */
+input:-webkit-autofill:focus {
+    border-bottom-color: #009a66 !important; /* your focus color */
+}
+.auth-question {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    color: #003c05;
+}
+.auth-question a {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0%;
+    text-decoration-skip-ink: auto;
+    color: #003c05;
+}
+.auth-btn {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0%;
+}
+.aggreement {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #003c05;
+}
+.auth-or {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    color: #003c05;
+}
+.forgot-title {
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #094d02;
+}
+.password-success-title {
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-align: right;
+    color: #003c05;
+}
+.password-success-msg {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-align: center;
+    color: #525252;
+}
+.password-success-resend {
+    font-family: Inter;
+    font-weight: 200;
+    font-style: Italic;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-align: center;
+}
+.password-success-resend span {
+    font-family: Inter;
+    font-weight: 200;
+    font-style: Italic;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0%;
+    text-decoration-skip-ink: auto;
+}
+.menu {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-align: right;
+    color: #042e00;
+}
+.donate-btn {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-align: right;
+}
+.join-btn {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 15px;
+    line-height: 60px;
+    letter-spacing: -2%;
+    text-align: right;
+    color: #042e00;
+}
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-down {
+    animation: slideDown 0.4s ease forwards;
+}
+.home-hero-title {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: Medium;
+    line-height: 30px;
+    letter-spacing: -2%;
+    text-transform: uppercase;
+    color: #676767;
+}
+.home-hero-bold-text {
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    /* line-height: 80px; */
+    letter-spacing: -2%;
+    text-align: center;
+    text-transform: uppercase;
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 1s ease forwards;
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 1.2s ease forwards;
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.delay-\[200ms\] {
+    animation-delay: 200ms;
+}
+
+.delay-\[400ms\] {
+    animation-delay: 400ms;
+}
+
+.delay-\[600ms\] {
+    animation-delay: 600ms;
 }

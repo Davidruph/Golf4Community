@@ -1,93 +1,114 @@
 @extends('layouts.app')
-@section('title', 'Login Form')
+@section('title', 'Membership Form')
 
 @php
-    $inputClass =
-        'bg-gray-50 text-gray-900 text-sm focus:ring-[#009a66] focus:border-[#009a66] block w-full p-2.5 rounded-[4px] border border-[#ccc] text-[14px]';
+    $inputClass = '
+        border-0 border-b border-[#C6C6C6]
+        bg-white w-full h-[33.52px]
+        focus:border-[#009a66] focus:ring-0 focus:outline-none
+        rounded-none transition-colors duration-200 text-[18px]
+    ';
 @endphp
 
 @section('content')
-    <div class="w-full max-w-4xl mx-auto mt-10 p-8 bg-white border border-gray-200 rounded-lg shadow-md">
-        <div class="flex items-center justify-center mb-3">
-            <a href="/">
-                <img src="/logo.png" class="h-20 w-auto" alt="Logo">
-            </a>
-        </div>
-
-        <h1 class="text-[27px] text-center mb-10 text-[#eb9532] font-semibold">SIGN IN</h1>
-
-        {{-- ✅ Flash messages --}}
-        @includeWhen(session('success') || session('error'), 'alerts.alert')
-
-        {{-- ✅ Login Form --}}
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div class="mb-3">
-                <label for="email" class="block mb-1 text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" class="{{ $inputClass }}">
-                @error('email')
-                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                @enderror
+    <section class="w-full bg-white min-h-screen flex items-center justify-center">
+        <div class="p-3 flex flex-col md:flex-row w-full items-center justify-center relative">
+            {{-- Left Image --}}
+            <div class="hidden md:block w-full h-full min-h-[95dvh] bg-cover bg-center bg-no-repeat rounded-[20px]"
+                style="background-image: url('{{ asset('images/login-bg.svg') }}');">
             </div>
 
-            <div class="mb-2">
-                <label for="password" class="block mb-1 text-sm font-medium text-gray-700">Password</label>
-                <input type="password" name="password" id="password" class="{{ $inputClass }}">
-                @error('password')
-                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                @enderror
+
+
+            {{-- Right Form --}}
+            <div class="w-full max-w-[589px] flex flex-col justify-center px-3 md:px-[30px] lg:px-[60px]">
+                {{-- Logo --}}
+                <div class="flex items-center w-full justify-center mb-8">
+                    <a href="{{ route('homepage') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo"
+                            class="w-60"></a>
+                </div>
+
+                {{-- Flash messages --}}
+                @includeWhen(session('success') || session('error'), 'alerts.alert')
+
+
+                <p class="auth-subtitle">LOGIN</p>
+                <h2 class="auth-title pb-8">START YOUR ROUND!</h2>
+
+                <form method="POST" action="{{ route('login') }}" class="w-full">
+                    @csrf
+
+                    {{-- First & Last Name --}}
+                    <div class="flex flex-col gap-8 mb-8">
+                        <div class="flex flex-col w-full">
+                            <label class="auth-label">Email Address <span class="label-span">*</span></label>
+                            <input type="email" name="email" value="{{ old('email') }}" class="{{ $inputClass }}"
+                                required>
+                            @error('email')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="relative flex flex-col w-full">
+                            <label class="auth-label">Password <span class="label-span">*</span></label>
+                            <input type="password" id="password" name="password" class="{{ $inputClass }} pr-10"
+                                required>
+                            <button id="togglePassword" type="button">
+                                <i id="password-icon"
+                                    class="fa-solid fa-eye absolute right-2 top-[30px] text-gray-500 cursor-pointer"></i></button>
+                            @error('password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="w-full flex justify-between">
+                        <div class="flex gap-2 mb-6 items-center">
+                            <input id="remember" type="checkbox" name="remember"
+                                class="accent-[#003c05] border-gray-300 focus:ring-[#003c05] rounded-full w-5 h-5" required>
+                            <label for="remember" class="auth-question">
+                                Stay Signed In
+                            </label>
+                        </div>
+
+                        <div class="">
+                            <a href="{{ route('password.request') }}" class="auth-question flex item-center gap-2"><img
+                                    src="{{ asset('images/lock.svg') }}" alt="">Forgot Your Password?</a>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="auth-btn cursor-pointer w-full h-[57px] rounded-[10px] flex items-center justify-center bg-[#003C05] text-white transition">
+                        LOGIN
+                    </button>
+
+                    <p class="auth-or text-center py-3">or</p>
+
+                    <div class="flex items-center gap-3 justify-center">
+                        <a href="{{ route('social.redirect', 'facebook') }}"
+                            class="flex items-center justify-center w-[70.75px] h-[57px] rounded-[10px] bg-[#133c89] text-white">
+                            <i class="fa-brands fa-facebook-f" class="w-5 h-5"></i>
+                        </a>
+                        <a href="{{ route('social.redirect', 'google') }}"
+                            class="flex items-center justify-center w-[70.75px] h-[57px] rounded-[10px] bg-[#c22e1b] text-white">
+                            <i class="fa-brands fa-google" class="w-5 h-5"></i>
+                        </a>
+                        <a href="{{ route('social.redirect', 'twitter') }}"
+                            class="flex items-center justify-center w-[70.75px] h-[57px] rounded-[10px] bg-black text-white">
+                            <i class="fa-brands fa-x-twitter" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+
+                    <div class="text-center mt-6">
+                        <p class="auth-question">
+                            Don’t have an account
+                            <a href="{{ route('register') }}" class="text-[#009a66] hover:underline font-medium">
+                                signup
+                            </a>
+                        </p>
+                    </div>
+                </form>
             </div>
-
-            {{-- ✅ Forgot Password --}}
-            <div class="text-right mb-6">
-                <a href="{{ route('password.request') }}" class="text-sm text-[#009a66] hover:underline font-medium">
-                    Forgot Password?
-                </a>
-            </div>
-
-            <button type="submit"
-                class="w-full text-white bg-[#009a66] hover:bg-[#00855a] focus:ring-4 focus:outline-none focus:ring-[#00b37d] font-medium rounded-lg text-sm px-5 py-2.5 transition">
-                Sign In
-            </button>
-        </form>
-
-        {{-- ✅ OR divider --}}
-        <div class="flex items-center justify-center my-6">
-            <div class="border-t border-gray-300 flex-grow"></div>
-            <span class="px-3 text-sm text-gray-500">OR</span>
-            <div class="border-t border-gray-300 flex-grow"></div>
         </div>
-
-        {{-- ✅ Social Logins --}}
-        <div class="space-y-3">
-            <a href="{{ route('social.redirect', 'google') }}"
-                class="flex items-center bg-[#c22e1b] justify-center gap-2 w-full border border-gray-300 rounded-lg py-2.5 text-white hover:bg-[#862519] transition">
-                <i class="fa-brands fa-google" class="w-5 h-5"></i>
-                Continue with Google
-            </a>
-
-            <a href="{{ route('social.redirect', 'facebook') }}"
-                class="flex items-center bg-[#133c89] justify-center gap-2 w-full border border-gray-300 rounded-lg py-2.5 text-white hover:bg-[#0d2d69] transition">
-                <i class="fa-brands fa-facebook-f" class="w-5 h-5"></i>
-                Continue with Facebook
-            </a>
-
-            <a href="{{ route('social.redirect', 'twitter') }}"
-                class="flex items-center bg-black justify-center gap-2 w-full border border-gray-300 rounded-lg py-2.5 text-white hover:bg-gray-800 transition">
-                <i class="fa-brands fa-x-twitter" class="w-5 h-5"></i>
-                Continue with Twitter
-            </a>
-        </div>
-
-        {{-- ✅ Register Redirect --}}
-        <div class="text-center mt-8">
-            <p class="text-sm text-gray-700">
-                Don’t have an account?
-                <a href="{{ route('register') }}" class="text-[#eb9532] hover:underline font-medium">
-                    Register
-                </a>
-            </p>
-        </div>
-    </div>
+    </section>
 @endsection

@@ -17,6 +17,8 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
+        // session()->forget(['form_data', 'step']);
+
         $countries = DB::table('countries')->get();
         $profession_types = DB::table('profession_type')->get();
         $golf_courses = DB::table('golf_courses')->orderBy('course_name', 'asc')->pluck('course_name', 'id');
@@ -158,6 +160,21 @@ class AuthController extends Controller
     public function showForgotPasswordForm()
     {
         return view('auth.forgot-password');
+    }
+
+    public function showForgotPasswordSuccess()
+    {
+        return view('auth.forgot-password-success');
+    }
+
+    public function showNewPassword()
+    {
+        return view('auth.new-password');
+    }
+
+    public function showNewPasswordSuccess()
+    {
+        return view('auth.new-password-success');
     }
 
     public function login(Request $request)
