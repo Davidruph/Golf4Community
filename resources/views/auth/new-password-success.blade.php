@@ -24,8 +24,7 @@
             <div class="w-full max-w-[589px] flex flex-col justify-center px-3 md:px-[30px] lg:px-[60px]">
                 {{-- Logo --}}
                 <div class="flex items-center w-full justify-center mb-8">
-                    <a href="{{ route('homepage') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo"
-                            class="w-60"></a>
+                    <a href="{{ route('homepage') }}"><img src="{{ asset('logo.png') }}" alt="Logo" class="w-25"></a>
                 </div>
 
                 {{-- Flash messages --}}

@@ -23,8 +23,7 @@
             <div class="w-full flex flex-col items-center justify-center px-3 md:px-[30px] lg:px-[60px]">
                 {{-- Logo --}}
                 <div class="flex items-center w-full justify-center mb-8">
-                    <a href="{{ route('homepage') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo"
-                            class="w-60"></a>
+                    <a href="{{ route('homepage') }}"><img src="{{ asset('logo.png') }}" alt="Logo" class="w-25"></a>
                 </div>
 
                 {{-- Flash messages --}}
@@ -327,6 +326,14 @@
                         </div>
                     @endif
 
+                    <div class="text-center mt-6">
+                        <p class="auth-question">
+                            Already have an account?
+                            <a href="{{ route('login') }}" class="text-[#009a66] hover:underline font-medium">
+                                Login
+                            </a>
+                        </p>
+                    </div>
 
                     <div class="flex items-center justify-center gap-5 pt-5">
                         @if ($step > 1)
@@ -341,14 +348,7 @@
                             {{ $step < 3 ? 'NEXT' : 'SUBMIT' }}
                         </button>
                     </div>
-                    <div class="text-center mt-6">
-                        <p class="auth-question">
-                            Already have an account?
-                            <a href="{{ route('login') }}" class="text-[#009a66] hover:underline font-medium">
-                                Login
-                            </a>
-                        </p>
-                    </div>
+
                 </form>
             </div>
         </div>

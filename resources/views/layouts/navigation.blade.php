@@ -5,8 +5,8 @@
         <!-- Logo + Menu Toggle -->
         <div class="flex items-center justify-between w-full lg:w-auto">
             <a href="{{ route('homepage') }}">
-                <img src="{{ asset('images/logo.svg') }}"
-                    class="w-[147px] h-[60px] transition-transform duration-500 hover:scale-105" alt="Logo">
+                <img src="{{ asset('logo.png') }}"
+                    class="w-[147px] h-[90px] transition-transform duration-500 hover:scale-105" alt="Logo">
             </a>
 
             <!-- Menu Toggle Button (visible on md and below) -->
@@ -57,7 +57,7 @@
                     Join Us
                 </a>
 
-                <img src="{{ asset('images/user.svg') }}" alt="User"
+                <img src="{{ asset('images/logout.svg') }}" alt="User"
                     class="w-8 h-8 mx-auto lg:mx-0 mt-3 lg:mt-0 transition-transform duration-300 hover:scale-110 cursor-pointer">
             </div>
         </div>
