@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\DataController;
+use Dflydev\DotAccessData\Data;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', function () {
@@ -25,7 +27,17 @@ Route::middleware('guest')->group(function () {
     Route::get('new-password', [AuthController::class, 'showNewPassword'])->name('password.new');
     Route::get('new-password-success', [AuthController::class, 'showNewPasswordSuccess'])->name('password.new.success');
 
+    Route::get('our-partners', [DataController::class, 'showPartners'])->name('partners.index');
+    Route::get('/golf-courses/{id}', [DataController::class, 'showPartnersId'])->name('partners.show');
 
+    Route::get('golf-courses', [DataController::class, 'showGolfCourses'])->name('golf.courses');
+    Route::get('/golf-details/{id}', [DataController::class, 'show'])->name('golf.details');
+
+    Route::get('contact', [DataController::class, 'showContact'])->name('contact.show');
+    Route::post('/contact', [DataController::class, 'submitContact'])->name('contact.submit');
+
+    Route::get('/events', [DataController::class, 'showEvents'])->name('events.index');
+    Route::get('/event-details/{id}', [DataController::class, 'showEventDetails'])->name('events.show');
 
     Route::get('auth/{provider}', [SocialAuthController::class, 'redirect'])->name('social.redirect');
     Route::get('auth/{provider}/callback', [SocialAuthController::class, 'callback'])->name('social.callback');

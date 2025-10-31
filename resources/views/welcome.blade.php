@@ -30,6 +30,8 @@
         </div>
     </section>
 
+    @include('include.events')
+
     <section class="bg-white py-20 px-6 flex items-center justify-center overflow-hidden">
         <div class="w-full max-w-[1358px] grid md:grid-cols-2 gap-10 items-center">
             <!-- Left: Heading -->

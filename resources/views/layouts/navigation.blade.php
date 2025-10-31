@@ -31,15 +31,16 @@
                 <li><a href="/"
                         class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">Home</a>
                 </li>
-                <li><a href="/about"
-                        class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">About
-                        Us</a></li>
-                <li><a href="/tournaments"
-                        class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">Tournaments</a>
+
+                <li><a href="/events"
+                        class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">Events</a>
                 </li>
                 <li><a href="/golf-courses"
                         class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">Golf
                         Courses</a></li>
+                <li><a href="/our-partners"
+                        class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">Our
+                        Partners</a></li>
                 <li><a href="/contact"
                         class="menu block py-2 px-3 hover:text-[#042E00] border-b-2 border-transparent hover:border-[#042E00] transition-all duration-300">Contact</a>
                 </li>

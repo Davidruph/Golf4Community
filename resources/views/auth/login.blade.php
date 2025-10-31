@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Membership Form')
+@section('title', 'Login Form')
 
 @php
     $inputClass = '
